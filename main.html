@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CrowdCare – Community Help & Volunteering Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    /* BASIC RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;              /* dark blue */
+      color: #e5e7eb;                   /* light gray */
+      line-height: 1.5;
+    }
+
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+
+    /* LAYOUT HELPERS */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+
+    /* HEADER / NAVBAR */
+    header {
+      background: #020617;
+      border-bottom: 1px solid #1f2937;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+
+    .logo {
+      font-weight: bold;
+      font-size: 20px;
+      color: #4ade80;
+    }
+
+
+    .tagline {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+
+    .nav-left {
+      display: flex;
+      flex-direction: column;
+    }
+
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      font-size: 14px;
+      color: #9ca3af;
+    }
+
+
+    .nav-links a:hover {
+      color: #e5e7eb;
+    }
+
+
+    .nav-cta {
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: #22c55e;
+      color: #022c22;
+      font-size: 13px;
+      border: none;
+      cursor: pointer;
+    }
+
+
+    .nav-cta:hover {
+      background: #16a34a;
+    }
+
+
+    /* HERO SECTION */
+    .hero {
+      padding: 32px 16px 24px;
+    }
+
+
+    .hero-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      align-items: center;
+    }
+
+
+    .hero-text {
+      flex: 1 1 260px;
+    }
+
+
+    .hero-pill {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid #4b5563;
+      font-size: 11px;
+      color: #9ca3af;
+      margin-bottom: 8px;
+    }
+
+
+    .hero-title {
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+
+    .hero-title span {
+      color: #4ade80;
+    }
+
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: #9ca3af;
+      margin-bottom: 16px;
+      max-width: 420px;
+    }
+
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+
+    .btn-primary {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: none;
+      background: #22c55e;
+      color: #022c22;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+
+    .btn-primary:hover {
+      background: #16a34a;
+    }
+
+
+    .btn-outline {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid #4b5563;
+      background: transparent;
+      color: #e5e7eb;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+
+    .btn-outline:hover {
+      background: #111827;
+    }
+
+
+    .hero-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 12px;
+    }
+
+
+    .metric {
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: #020617;
+      border: 1px solid #1f2937;
+    }
+
+
+    .metric strong {
+      display: block;
+      font-size: 14px;
+    }
+
+
+    /* HERO CARD (RIGHT SIDE) */
+    .hero-card {
+      flex: 1 1 260px;
+      background: #020617;
+      border-radius: 12px;
+      padding: 12px;
+      border: 1px solid #1f2937;
+    }
+
+
+    .hero-card-title {
+      font-size: 13px;
+      margin-bottom: 8px;
+      color: #9ca3af;
+    }
+
+
+    .request-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+
+    .request-item {
+      padding: 8px;
+      border-radius: 8px;
+      background: #020617;
+      border: 1px solid #1f2937;
+      font-size: 12px;
+    }
+
+
+    .request-item strong {
+      display: block;
+    }
+
+
+    .request-tag {
+      display: inline-block;
+      margin-top: 4px;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #7f1d1d;
+      color: #fee2e2;
+    }
+
+
+    .request-tag.normal {
+      background: #78350f;
+      color: #fef3c7;
+    }
+
+
+    .request-tag.low {
+      background: #064e3b;
+      color: #d1fae5;
+    }
+
+
+    .hero-card-footer {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+
+    /* SECTION SHARED STYLES */
+    section {
+      padding: 24px 16px;
+      border-top: 1px solid #1f2937;
+    }
+
+
+    .section-title {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+
+    .section-subtitle {
+      font-size: 13px;
+      color: #9ca3af;
+      margin-bottom: 16px;
+      max-width: 480px;
+    }
+
+
+    /* MISSION / PROBLEM */
+    .two-column {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+
+    .simple-card {
+      flex: 1 1 260px;
+      background: #020617;
+      border-radius: 10px;
+      padding: 12px;
+      border: 1px solid #1f2937;
+      font-size: 13px;
+    }
+
+
+    .simple-card h3 {
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+
+    .highlight {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #111827;
+      border: 1px dashed #4b5563;
+      color: #d1fae5;
+    }
+
+
+    /* OPPORTUNITIES GRID */
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+      font-size: 11px;
+    }
+
+
+    .chip {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #020617;
+      border: 1px solid #1f2937;
+      color: #9ca3af;
+    }
+
+
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 13px;
+    }
+
+
+    .op-card {
+      flex: 1 1 260px;
+      background: #020617;
+      border-radius: 10px;
+      padding: 10px;
+      border: 1px solid #1f2937;
+    }
+
+
+    .op-card-title {
+      font-weight: bold;
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+
+
+    .urgency {
+      display: inline-block;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #7f1d1d;
+      color: #fee2e2;
+      margin-bottom: 6px;
+    }
+
+
+    .urgency.high {
+      background: #78350f;
+      color: #fef3c7;
+    }
+
+
+    .urgency.low {
+      background: #064e3b;
+      color: #d1fae5;
+    }
+
+
+    .op-meta {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 6px;
+    }
+
+
+    /* GET INVOLVED FORM */
+    .form-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+
+    form {
+      flex: 1 1 260px;
+      background: #020617;
+      border-radius: 10px;
+      padding: 12px;
+      border: 1px solid #1f2937;
+      font-size: 13px;
+    }
+
+
+    form h3 {
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+
+    .field {
+      margin-bottom: 8px;
+    }
+
+
+    label {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 2px;
+      color: #9ca3af;
+    }
+
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 6px 8px;
+      border-radius: 6px;
+      border: 1px solid #374151;
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 13px;
+    }
+
+
+    textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+
+    .form-note {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-bottom: 8px;
+    }
+
+
+    .form-button {
+      margin-top: 4px;
+    }
+
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid #1f2937;
+      padding: 12px 16px 18px;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+
+    .footer-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: space-between;
+    }
+
+
+    /* RESPONSIVE */
+    @media (max-width: 700px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+
+      .nav-links {
+        flex-wrap: wrap;
+      }
+
+
+      .hero-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+    
+
+<header>
+  <div class="container nav">
+    <div class="nav-left">
+      <a href="index.html" class="logo">CrowdCare</a>
+      <span class="tagline">Community help for tier‑2 & tier‑3 cities</span>
+    </div>
+    <div class="nav-links">
+      <a href="main.html#mission">Mission</a>
+      <a href="main.html#opportunities">Opportunities</a>
+      <a href="contact.html">Get involved</a>
+    </div>
+    <a href="contact.html">
+      <button class="nav-cta">Become a volunteer</button>
+    </a>
+  </div>
+</header>
+
+
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <div class="hero-pill">Live requests near you · Demo</div>
+        <h1 class="hero-title">
+          Turn spare hours into <span>real help</span> for your community.
+        </h1>
+        <p class="hero-subtitle">
+          CrowdCare connects volunteers with nearby people who need help with food, blood donation,
+          and tutoring – all in one simple place.
+        </p>
+
+
+        <div class="hero-buttons">
+          <a href="#get-involved"><button class="btn-primary">Start helping now</button></a>
+          <a href="#opportunities"><button class="btn-outline">View open requests</button></a>
+        </div>
+
+
+        <div class="hero-metrics">
+          <div class="metric">
+            <strong>27</strong>
+            Requests helped today
+          </div>
+          <div class="metric">
+            <strong>140+</strong>
+            Active volunteers
+          </div>
+          <div class="metric">
+            <strong>6</strong>
+            Pilot cities
+          </div>
+        </div>
+      </div>
+
+
+      <div class="hero-card">
+        <div class="hero-card-title">Sample live help board</div>
+        <div class="request-list">
+          <div class="request-item">
+            <strong>Emergency blood · O+</strong>
+            City Hospital, Nashik · 3 km away
+            <span class="request-tag">Critical</span>
+          </div>
+          <div class="request-item">
+            <strong>Weekly ration delivery</strong>
+            Elderly couple · Indore, Ward 11
+            <span class="request-tag normal">Today</span>
+          </div>
+          <div class="request-item">
+            <strong>Math tutoring · Class 9</strong>
+            Govt. School student · Guntur
+            <span class="request-tag low">Flexible</span>
+          </div>
+        </div>
+        <div class="hero-card-footer">
+          Demo only: these cards show how real requests would appear to volunteers.
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- MISSION / PROBLEM -->
+  <section id="mission">
+    <div class="container">
+      <h2 class="section-title">Why CrowdCare</h2>
+      <p class="section-subtitle">
+        People in smaller cities often struggle to find help in time, while willing volunteers have
+        no single place to discover who needs them.
+      </p>
+
+
+      <div class="two-column">
+        <div class="simple-card">
+          <h3>Our mission</h3>
+          <p>
+            Make it as easy to find help for your neighbourhood as it is to order food. We connect
+            volunteers, NGOs, and local citizens on one simple website.
+          </p>
+          <span class="highlight">Goal: 10,000 volunteers · 50,000 families helped</span>
+        </div>
+
+
+        <div class="simple-card">
+          <h3>The problem</h3>
+          <p>
+            Requests for help are scattered across WhatsApp, posters, and calls. Many never reach
+            the right people in time, even though volunteers live nearby.
+          </p>
+          <span class="highlight">One hub can turn good intentions into real support</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- OPPORTUNITIES -->
+  <section id="opportunities">
+    <div class="container">
+      <h2 class="section-title">Live opportunities (demo)</h2>
+      <p class="section-subtitle">
+        These sample cards show how volunteers could pick the kind of help that fits their skills
+        and free time.
+      </p>
+
+
+      <div class="chips">
+        <span class="chip">Blood donation</span>
+        <span class="chip">Ration & essentials</span>
+        <span class="chip">Tutoring</span>
+        <span class="chip">On‑ground support</span>
+      </div>
+
+
+      <div class="card-grid">
+        <div class="op-card">
+          <div class="urgency">Critical · 4 hrs</div>
+          <div class="op-card-title">Blood donor · O+ needed</div>
+          <p>
+            ICU patient needs two O+ units today. Hospital will arrange free tests and pickup for
+            eligible donors.
+          </p>
+          <p class="op-meta">Location: City Hospital, Nashik · Distance ~3 km</p>
+        </div>
+
+
+        <div class="op-card">
+          <div class="urgency high">High · This week</div>
+          <div class="op-card-title">Monthly ration support</div>
+          <p>
+            Single mother with two kids needs dry ration support for one month while she recovers
+            from surgery.
+          </p>
+          <p class="op-meta">Location: Indore · Ward 11 · Need: ₹1,800</p>
+        </div>
+
+
+        <div class="op-card">
+          <div class="urgency low">Low · Flexible</div>
+          <div class="op-card-title">Math mentor · Class 9</div>
+          <p>
+            Govt. school student needs help with algebra and geometry for 2 hours per week, online
+            or offline.
+          </p>
+          <p class="op-meta">Location: Guntur · Duration: 3 months</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- GET INVOLVED -->
+  <section id="get-involved">
+    <div class="container">
+      <h2 class="section-title">Get involved</h2>
+      <p class="section-subtitle">
+        Forms below are part of the design only. In a real project, they would be connected to a
+        database or email system.
+      </p>
+
+
+      <div class="form-grid">
+        <!-- VOLUNTEER FORM -->
+        <form>
+          <h3>Volunteer signup</h3>
+          <p class="form-note">
+            Tell us how you want to help. This is a static demo form for the competition.
+          </p>
+
+
+          <div class="field">
+            <label for="name">Full name</label>
+            <input id="name" type="text" placeholder="Enter your name" />
+          </div>
+
+
+          <div class="field">
+            <label for="phone">Phone / WhatsApp</label>
+            <input id="phone" type="text" placeholder="+91‑" />
+          </div>
+
+
+          <div class="field">
+            <label for="city">City</label>
+            <input id="city" type="text" placeholder="e.g. Nashik, Indore" />
+          </div>
+
+
+          <div class="field">
+            <label for="skill">How you can help</label>
+            <select id="skill">
+              <option>Choose one</option>
+              <option>Blood donation</option>
+              <option>Grocery / ration delivery</option>
+              <option>Student mentoring</option>
+              <option>On‑ground volunteering</option>
+            </select>
+          </div>
+
+
+          <div class="field">
+            <label for="hours">Time you can give per week</label>
+            <select id="hours">
+              <option>Up to 2 hours</option>
+              <option>2 – 5 hours</option>
+              <option>5 – 10 hours</option>
+            </select>
+          </div>
+
+
+          <div class="field">
+            <label for="note">Anything we should know?</label>
+            <textarea id="note" placeholder="Vehicle, language, past experience, etc."></textarea>
+          </div>
+
+
+          <div class="form-button">
+            <button type="button" class="btn-primary">Preview my matches (demo)</button>
+          </div>
+        </form>
+
+
+        <!-- REQUEST FORM -->
+        <form>
+          <h3>Request help</h3>
+          <p class="form-note">
+            For safety, real requests would be added by verified NGOs or coordinators.
+          </p>
+
+
+          <div class="field">
+            <label for="type">Type of help</label>
+            <select id="type">
+              <option>Blood / medical</option>
+              <option>Food / ration</option>
+              <option>Education / mentoring</option>
+              <option>On‑ground support</option>
+            </select>
+          </div>
+
+
+          <div class="field">
+            <label for="desc">Short description</label>
+            <textarea
+              id="desc"
+              placeholder="Who needs help, what is needed, and by when?"
+            ></textarea>
+          </div>
+
+
+          <div class="field">
+            <label for="area">City / area</label>
+            <input id="area" type="text" placeholder="e.g. Guntur, Ward 4" />
+          </div>
+
+
+          <div class="field">
+            <label for="urgency">Urgency</label>
+            <select id="urgency">
+              <option>Critical · within 24 hours</option>
+              <option>High · this week</option>
+              <option>Normal · flexible</option>
+            </select>
+          </div>
+
+
+          <div class="field">
+            <label for="contact">Contact name / NGO</label>
+            <input id="contact" type="text" placeholder="Name and phone number" />
+          </div>
+
+
+          <div class="form-button">
+            <button type="button" class="btn-outline">Save request (demo)</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+ <footer>
+  <div class="footer-inner">
+    <span>© 2025 CrowdCare · Prototype website for competition demo.</span>
+    <span>Built with simple HTML & CSS (no JavaScript).</span>
+  </div>
+</footer>
+
+  
+ </footer>
+</body>
+</html> 
